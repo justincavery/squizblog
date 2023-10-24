@@ -1,0 +1,135 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import designSystem from './planetaria-design-system.png'
+
+export const article = {
+  author: 'Justin Avery',
+  date: '2023-06-01',
+  title: 'Optimising The Graph Subgraph Queries: A Guide to Proxy Cache Configuration',
+  description:
+    'Boost your query performance with The Graph subgraphs by fine-tuning your proxy cache configurations. Dive into this comprehensive guide to leverage caching mechanisms for faster and more efficient requests.',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+
+<Image src={designSystem} alt="" />
+
+## Welcome to NFTX + Subgraph
+
+I'm Javery and I with the NFTX Core team.
+
+I'm primarily responsible for the all the Web2 aspects of the product with a focus on Devops, Support, Developer relations on Integrations, and managing project logistics.
+
+## What is NFTX?
+
+NFTX is a platform for creating liquid markets for illiquid Non-Fungible Tokens (NFTs).
+
+Users deposit their NFT into an NFTX vault and mint a fungible ERC20 token (vToken) that represents a claim on an asset from within the vault.
+
+## Who does NFTX benefit?
+
+### Shoppers
+
+The NFTs on contained on the protocol can be bought through a number of different places including our own NFTX Marketplace, OpenSea Pro, UniSwap NFTs, and Reservoir Marketplace.
+
+### NFT Projects
+
+Projects are able to create vaults and seed them with NFTs and ETH to provide a stable floor for their collection. We recommend that new projects utilise 10% of their initial mint income to buy back the Floor with half of the ETH and then deposit those NFTs and remaining ETH into the vault pool.
+
+This provides a clear signal to existing NFT holders that the project team is willing to back their own project, provides users with an easy way to exit the project, and users who want to earn yield with their NFT now have a simple way to do so.
+
+### Arbitraguers
+
+These are the folks that find an offer on another marketplace for more than the current price on NFTX. They simply buy the NFT from NFTX and then sell it into the other marketplace.
+
+The same works in the other direction, where cheap offers (or fat fingers) are added to a Marketplace where users can buy the NFT and then instantly sell into the NFTX vaults.
+
+This arbitrage keeps the prices in check and ensures that liquidity providers are earning yield throughout the process as well.
+
+### Defi Users (liquidity providers)
+
+With a range of 3%—500% APR on the vaults it's an inticing opportunity for defi users and liquidity providers. All of the fees that NFTX collect during the buy/sell/swap of NFTs on the platform are distributed to liqudity and inventory providers at an 80/20% split.
+
+### Lending platforms
+
+When NFTs are used as collatoral for lending ETH there are times where the loan will be defaulted. On these occasions the lender can sell the NFT into the NFTX vaults to recover their initial lend amount, and can also utilise the vault price feeds to determine what a fair market value for the NFT is when lending.
+
+## NFTX Marketplace
+
+NFTX is split into two main categories, the Marketplace when you buy/sell/swap NFTs, and the Yield earning side of the protocol.
+
+This view is the marketplace view, let's take a look at what is powering what we see on the screen
+
+## NFTX Marketplace - subgraph powered
+
+The NFTX V2 subgraph is doing a lot of the heavy lifting on the homepage. It provides data about
+
+- Trending collections
+- Activity on the protocol
+- New collections and collections by TVL
+
+## NFTX Vault page(s)
+
+These pages are where users will do most of their shopping, looking through all of the items in the vault and filtering down to what they want to buy.
+
+## NFTX Vault page(s) - subgraph powered
+
+The vault pages themseles are heavily powered by the subgraph again. We utilise the NFTX V2 subgraph for
+
+- Vault name
+- Collection name
+- Number of assets
+- Individual assets in the vault
+
+We also used the Sushi Subgraph to define the price for items within the vault.
+
+## NFTX Vault Info page(s)
+
+The info page on the vaults contains all the data you need to know about the vaults and its recent performance.
+
+## NFTX Vault Info page(s) - subgraph powered
+
+Again you can see that a number of different subgraphs are used to power this page.
+
+At the top we have the Sushi Subgraph which returns all of the pricing information for buys/sells/swaps and spot price. These are calculated by also checking what the fee settings are on the vault itself (which is done using the NFTX V2 subgraph).
+
+The NFTX V2 subgraph also powers the recent activity, the various contract addresses linked to the vault and the fee settings.
+
+The NFTX Fees subgraph is also used to showcase how many fees have been earned over time, both by the vault and by users.
+
+As you can see more and more data is required for multiple subgraphs to pull together these pages. This works great, but as the pages began storing more information we found that we were making a lot requests to the subgraph.
+
+## Yield App
+
+This is the yield app which has even more data to be displayed. On this screen you have the amount your staking, how much you can claim, each of the vaults you have positions on, which positions you have for each of the vaults, what you are owned for each of the vaults, the earnings made for each vault recently, the top performing yield vaults over the past 7 days, the APR on each of the vaults for each of the two staking types... and that is just the landing page.
+
+## Issues with the subgraph
+
+We began to fid that there were some issues when we were creating more complex interfaces. The graph provided a great way to historically fetch the data that we needed, and also provided the data for anyone to report on the protocol, however the graph responses were not optimised for the way in which the app was displaying the data.
+
+We found that the issues we had fell into three key areas.
+
+1. Cost
+2. Additional Frontend Calculations
+3. Indexing speed
+
+```c
+exbibyte_wins = gigahertz(3);
+grayscaleUtilityClient = control_uat;
+pcmciaHibernate = oop_virus_console(text_mountain);
+if (stateWaisFirewire >= -2) {
+    jfs = 647065 / ldapVrml(tutorialRestore, 85);
+    metal_runtime_parse = roomComputingResolution - toolbarUpload +
+            ipx_nvram_open;
+} else {
+    maximizeSidebar *= suffix_url(flatbed + 2, requirements_encoding_node +
+            only_qbe_media, minicomputer);
+}
+```
+
